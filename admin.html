@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin</title>
+    <link rel="stylesheet" type="text/css" href="src/css/main.css">
+    <script src="src/js/react.min.js"></script>
+    <script src="src/js/react-dom.min.js"></script>
+    <script src="src/js/browser.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
+</head>
+<body>
+   <div class="container">
+   <h3>Dashboard</h3>
+    <div id="admin" ></div>
+   </div>
+    <script type="text/babel">
+        class Admin extends React.Component {
+
+          constructor(props) {
+            super(props);
+
+            //  this.state.products = [];
+            this.state = {};
+            this.state.filterText = "";
+            this.state.products = [
+              {
+                "id":1,
+                "brand": "Nike",
+                "category": [
+                    "Home",
+                    "Home > Shoes",
+                    "Home > Shoes > Running"
+                ],
+                "image": "https://ss-imager-prod.freetls.fastly.net/www-images/480/product_images/71dda0de350093545ad4915713ea5a4d.jpg",
+                "msrp": "47",
+                "price": "37.99",
+                "product_id": "189909",
+                "stock": "in stock",
+                "tags": [
+                    "running",
+                    "athlete"
+                ],
+                "size":[
+                    "38",
+                    "39",
+                    "40"
+                ],
+                "ket":"Warna Cream, Nude, dan Grey (kiri ke kanan)"
+            },
+           {
+                "id":2,
+                "brand": "Reebok",
+                "category": [
+                    "Home",
+                    "Home > Shoes",
+                    "Home > Shoes > Sports"
+                ],
+                "image": "https://ss-imager-prod.freetls.fastly.net/www-images/480/product_images/9c80c3d0f7c64d4e179526e16eacd803.jpg",
+                "msrp": "47",
+                "price": "37.99",
+                "product_id": "189910",
+                "availability": "in stock",
+                "tags": [
+                    "basketball"
+                ],
+                "size":[
+                    "38",
+                    "39",
+                    "40"
+                ],
+                "ket":"Warna Cream, Nude, dan Grey (kiri ke kanan)"
+            },
+           {
+                "id":3,
+                "brand": "Fautara Bow Pointy Sneakers",
+                "category": [
+                    "Home",
+                    "Home > Shoes",
+                    "Home > Shoes > Casual"
+                ],
+                "image": "https://ss-imager-prod.freetls.fastly.net/www-images/480/product_images/7c4e43fff236a1a8be9067deef00f9f2.jpg",
+                "msrp": "47",
+                "price": "37.99",
+                "product_id": "189910",
+                "availability": "in stock",
+                "tags": [
+                    "basketball"
+                ],
+                "size":[
+                    "38",
+                    "39",
+                    "40"
+                ],
+                "ket":"Warna Cream, Nude, dan Grey (kiri ke kanan)"
+            },
+                {
+                "id":4,
+                "brand": "Savabella Two Tone Sporty Sneakers",
+                "category": [
+                    "Home",
+                    "Home > Shoes",
+                    "Home > Shoes > Sports"
+                ],
+                "image": "https://ss-imager-prod.freetls.fastly.net/www-images/480/product_images/fab96f7bca6bbe46dc539d4a4375f4c9.jpg",
+                "msrp": "47",
+                "price": "37.99",
+                "product_id": "189910",
+                "availability": "in stock",
+                "tags": [
+                    "basketball"
+                ],
+                "size":[
+                    "38",
+                    "39",
+                    "40"
+                ],
+                "ket":"Warna Cream, Nude, dan Grey (kiri ke kanan)"
+            },
+            {
+                "id":5,
+                "brand": "Keysheva Stripes Sporty Sneakers",
+                "category": [
+                    "Home",
+                    "Home > Shoes",
+                    "Home > Shoes > Sports"
+                ],
+                "image": "https://ss-imager-prod.freetls.fastly.net/www-images/480/product_images/721a4b6ee77d0e5e721da10680e63e87.jpg",
+                "msrp": "47",
+                "price": "37.99",
+                "product_id": "189910",
+                "availability": "in stock",
+                "tags": [
+                    "basketball"
+                ],
+                "size":[
+                    "38",
+                    "39",
+                    "40"
+                ],
+                "ket":"Warna Cream, Nude, dan Grey (kiri ke kanan)"
+            },
+            {
+                "id":6,
+                "brand": "Keita Plain Casual Sneakers",
+                "category": [
+                    "Home",
+                    "Home > Shoes",
+                    "Home > Shoes > Casual"
+                ],
+                "image": "https://ss-imager-prod.freetls.fastly.net/www-images/480/product_images/65fe0e430280260d1422cd2b0070c620.jpg",
+                "msrp": "47",
+                "price": "37.99",
+                "product_id": "189910",
+                "availability": "in stock",
+                "tags": [
+                    "basketball"
+                ],
+                "size":[
+                    "38",
+                    "39",
+                    "40"
+                ],
+                "ket":"Warna Cream, Nude, dan Grey (kiri ke kanan)"
+            }
+            ];
+
+          }
+          handleUserInput(filterText) {
+            this.setState({filterText: filterText});
+          };
+          handleRowDel(product) {
+            var index = this.state.products.indexOf(product);
+            this.state.products.splice(index, 1);
+            this.setState(this.state.products);
+          };
+
+          handleAddEvent(evt) {
+            var id = (+ new Date() + Math.floor(Math.random() * 999999)).toString(36);
+            var product = {
+              id: id,
+              brand: "",
+              price: "",
+              category: "",
+              image: 0
+            }
+            this.state.products.push(product);
+            this.setState(this.state.products);
+
+          }
+
+          handleProductTable(evt) {
+            var item = {
+              id: evt.target.id,
+              brand: evt.target.brand,
+              value: evt.target.value
+            };
+        var products = this.state.products.slice();
+          var newProducts = products.map(function(product) {
+
+            for (var key in product) {
+              if (key == item.brand && product.id == item.id) {
+                product[key] = item.value;
+
+              }
+            }
+            return product;
+          });
+            this.setState({products:newProducts});
+          //  console.log(this.state.products);
+          };
+          render() {
+
+            return (
+              <div>
+                <SearchBar filterText={this.state.filterText} onUserInput={this.handleUserInput.bind(this)}/>
+                <ProductTable onProductTableUpdate={this.handleProductTable.bind(this)} onRowAdd={this.handleAddEvent.bind(this)} onRowDel={this.handleRowDel.bind(this)} products={this.state.products} filterText={this.state.filterText}/>
+              </div>
+            );
+
+          }
+
+        }
+        class SearchBar extends React.Component {
+          handleChange() {
+            this.props.onUserInput(this.refs.filterTextInput.value);
+          }
+          render() {
+            return (
+              <div className="form-group top10">
+        
+                    <input type="text" className="search form-control" placeholder="What you looking for?" value={this.props.filterText} ref="filterTextInput" onChange={this.handleChange.bind(this)}/>
+
+              </div>
+
+            );
+          }
+
+        }
+
+        class ProductTable extends React.Component {
+
+          render() {
+            var onProductTableUpdate = this.props.onProductTableUpdate;
+            var rowDel = this.props.onRowDel;
+            var filterText = this.props.filterText;
+            var product = this.props.products.map(function(product) {
+              if (product.brand.indexOf(filterText) === -1) {
+                return;
+              }
+              return (<ProductRow onProductTableUpdate={onProductTableUpdate} product={product} onDelEvent={rowDel.bind(this)} key={product.id}/>)
+            });
+            return (
+              <div>
+
+
+              <button type="button" onClick={this.props.onRowAdd} className="btn btn-success">Add</button>
+                <table className="table table-hover table-bordered results top10">
+                  <thead>
+                    <tr>
+                      <th className="col-md-3 col-xs-3">brand</th>
+                      <th className="col-md-3 col-xs-3">price</th>
+                      <th className="col-md-3 col-xs-3">quantity</th>
+                      <th className="col-md-3 col-xs-3">category</th>
+                      <th>action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {product}
+                  </tbody>
+
+                </table>
+              </div>
+            );
+
+          }
+
+        }
+
+        class ProductRow extends React.Component {
+          onDelEvent() {
+            this.props.onDelEvent(this.props.product);
+
+          }
+          render() {
+
+            return (
+              <tr className="eachRow">
+                <EditableCell onProductTableUpdate={this.props.onProductTableUpdate} cellData={{
+                  "type": "brand",
+                  value: this.props.product.brand,
+                  id: this.props.product.id
+                }}/>
+                <EditableCell onProductTableUpdate={this.props.onProductTableUpdate} cellData={{
+                  type: "price",
+                  value: this.props.product.price,
+                  id: this.props.product.id
+                }}/>
+                <EditableCell onProductTableUpdate={this.props.onProductTableUpdate} cellData={{
+                  type: "image",
+                  value: this.props.product.image,
+                  id: this.props.product.id
+                }}/>
+                <EditableCell onProductTableUpdate={this.props.onProductTableUpdate} cellData={{
+                  type: "category",
+                  value: this.props.product.category,
+                  id: this.props.product.id
+                }}/>
+                <td className="del-cell">
+                  <input type="button" onClick={this.onDelEvent.bind(this)} value="X" className="del-btn"/>
+                </td>
+              </tr>
+            );
+
+          }
+
+        }
+        class EditableCell extends React.Component {
+
+          render() {
+            return (
+              <td>
+                <input type='text' name={this.props.cellData.type} id={this.props.cellData.id} value={this.props.cellData.value} onChange={this.props.onProductTableUpdate}/>
+              </td>
+            );
+
+          }
+
+        }
+        ReactDOM.render( < Admin / > , document.getElementById('admin'));
+    </script>
+</body>
+</html>

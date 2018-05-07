@@ -1,0 +1,20 @@
+{
+  "name": "Sopy",
+  "version": "1.0.0",
+  "description": "interview infinite product",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sopyana",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^2.0.10",
+    "gulp-sass": "^2.3.1"
+  }
+}

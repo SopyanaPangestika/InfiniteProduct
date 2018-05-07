@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>React - Component</title>
+    <script src="../../js/react.min.js"></script>
+    <script src="../../js/react-dom.min.js"></script>
+    <script src="../../js/browser.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+
+    <div id="example"></div>
+
+    <script type="text/babel">
+
+    var InfiniteProduct = React.createClass({
+      getInitialState: function() {
+        return ({data: [], requestSent: false});
+      },
+
+      componentDidMount: function() {
+        window.addEventListener('scroll', this.handleOnScroll);
+
+        this.initProductData();
+        console.log("call request initProductData");
+      },
+
+      componentWillUnmount: function() {
+        window.removeEventListener('scroll', this.handleOnScroll);
+      },
+
+      initProductData: function() {
+        var data = this.createProductData(this.state.data.length, 100);
+
+        this.setState({data: data});
+      },
+
+      createProductData: function(startKey, counter) {
+        var i = 0;
+        var data = [];
+        for (i = 0; i < counter; i++) {
+          var ProductData = (<div key={startKey+i} className="data-info">Product Data {startKey+i}</div>);
+          data.push(ProductData);
+        }
+
+        return data;
+      },
+
+      querySearchResult: function() {
+        if (this.state.requestSent) {
+          return;
+        }
+
+        // enumerate a slow query
+        setTimeout(this.doQuery, 2000);
+
+        this.setState({requestSent: true});
+      },
+
+      doQuery: function() {
+        // use jQuery
+        $.ajax({
+          url: "#",
+          data: null,
+          method: "GET",
+          success: function(data, textStatus, jqXHR) {
+            var ProductData = this.createProductData(this.state.data.length, 20);
+            var newData = this.state.data.concat(ProductData);
+            this.setState({data: newData, requestSent: false});
+          }.bind(this),
+          error: function(jqXHR, textStatus, errorThrown) {
+            this.setState({requestSent: false});
+          }.bind(this)
+        });
+      },  
+
+      handleOnScroll: function() {
+        // http://stackoverflow.com/questions/9439725/javascript-how-to-detect-if-browser-window-is-scrolled-to-bottom
+        var scrollTop = (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
+        var scrollHeight = (document.documentElement && document.documentElement.scrollHeight) || document.body.scrollHeight;
+        var clientHeight = document.documentElement.clientHeight || window.innerHeight;
+        var scrolledToBottom = Math.ceil(scrollTop + clientHeight) >= scrollHeight;
+
+        if (scrolledToBottom) {
+          this.querySearchResult();
+        }
+      },
+
+      render: function() {
+        return (
+          <div>
+            <div className="data-container">
+              {this.state.data}
+            </div>
+            {(() => {
+              if (this.state.requestSent) {
+                return(
+                  <div className="data-loading">
+                    <i className="fa fa-refresh fa-spin"></i>
+                  </div>
+                );
+              } else {
+                return(
+                  <div className="data-loading"></div>
+                );
+              }
+            })()}
+          </div>
+        );
+      }
+    });
+
+    ReactDOM.render(
+      <InfiniteProduct />,
+      document.getElementById("example")
+    );
+    </script>
+
+</body>
+</html>
